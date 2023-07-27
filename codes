@@ -1,0 +1,3 @@
+install.packages("fredr")
+library(fredr)
+fredr_set_key("b9168860a665ecd26860a6de52d69e7a")
