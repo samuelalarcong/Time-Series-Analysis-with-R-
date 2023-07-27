@@ -1,3 +1,46 @@
+# First, you must install the package used to access data from  the Federal Reserve Bank of St. Louis FRED 
 install.packages("fredr")
 library(fredr)
 fredr_set_key("b9168860a665ecd26860a6de52d69e7a")
+
+# First, you must install the required package
+# install.packages("fredr")
+
+# Load the necessary packages
+library(fredr)
+
+# Set your FRED API key
+fredr_set_key("b9168860a665ecd26860a6de52d69e7a")
+
+# Define the series IDs and their corresponding names
+series_info <- list(
+  "DGS1" = "GS1",
+  "DGS2" = "GS2",
+  "DGS10" = "GS10",
+  "DGS5" = "GS5"
+)
+
+# Define the date range for the data
+observation_start <- as.Date("2006-01-01")
+observation_end <- as.Date("2023-01-01")
+frequency <- "q" # quarterly
+
+# Fetch data for each series and store it in a data frame
+data_list <- lapply(names(series_info), function(series_id) {
+  a <- fredr(
+    series_id = series_id,
+    observation_start = observation_start,
+    observation_end = observation_end,
+    frequency = frequency
+  )
+  data.frame(Date = as.Date(a$date), Value = as.numeric(a$value))
+})
+
+# Combine the data into a single data frame
+combined_data <- Reduce(function(df1, df2) merge(df1, df2, by = "Date", all = TRUE), data_list)
+
+# Set meaningful column names for the series
+colnames(combined_data)[-1] <- unlist(series_info)
+
+# Print the resulting data frame
+print(combined_data)
