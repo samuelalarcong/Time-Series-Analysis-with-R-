@@ -12,12 +12,20 @@ library(fredr)
 # Set your FRED API key
 fredr_set_key("b9168860a665ecd26860a6de52d69e7a")
 
-# Define the series IDs and their corresponding names
+# Define the series IDs and their corresponding names I just need to modiy this part to include more tieme series, so 
 series_info <- list(
-  "DGS1" = "GS1",
-  "DGS2" = "GS2",
-  "DGS10" = "GS10",
-  "DGS5" = "GS5"
+  "DGS1"           =   "GS1"        ,
+  "DGS2"           =   "GS2"        ,
+  "DGS10"          =   "GS10"       ,
+  "DGS5"           =   "GS5"        , 
+  "DTWEXBGS"       =   "ExRate"     , 
+  "AAA"            =   "AAA"        ,
+  "BAA"            =   "BAA"        , 
+  "MORTGAGE30US"   =   "Mortage"    , 
+  "GDPC1"          =   "gdp "       , 
+  "GDPDEF"         =   "Imdflactor" , 
+  "CPALTT01USQ661S"=   "cpi"        ,  
+  "UNRATE"         =   "unrate"
 )
 
 # Define the date range for the data
